@@ -15,11 +15,13 @@
   </style>
 </head>
 <body>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.154.0/examples/js/controls/OrbitControls.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.154.0/examples/js/loaders/GLTFLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1643200423/hands.js"></script>
-  <script>
+  <script type="module">
+    // Import Three.js and required modules
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.module.js';
+    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.154.0/examples/js/controls/OrbitControls.js';
+    import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.154.0/examples/js/loaders/GLTFLoader.js';
+    import { Hands } from 'https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1643200423/hands.js';
+
     // Scene setup
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -29,7 +31,7 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    const controls = new OrbitControls(camera, renderer.domElement);
 
     // Lighting
     const light = new THREE.DirectionalLight(0xffffff, 1);
@@ -40,7 +42,7 @@
     scene.add(ambientLight);
 
     // Load watch model
-    const loader = new THREE.GLTFLoader();
+    const loader = new GLTFLoader();
     let watch;
     loader.load('watch.glb', (gltf) => {
       watch = gltf.scene;
